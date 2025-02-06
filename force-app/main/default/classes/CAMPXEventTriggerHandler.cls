@@ -5,6 +5,7 @@ public with sharing class CAMPXEventTriggerHandler
         for (CAMPX__Event__c eventRecord : eventList) 
         {
             eventRecord.CAMPX__Status__c = 'Planning';
+            eventRecord.CAMPX__StatusChangeDate__c = System.now();
         }
     }
 
