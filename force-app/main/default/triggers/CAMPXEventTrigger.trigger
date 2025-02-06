@@ -8,6 +8,6 @@ trigger CAMPXEventTrigger on  CAMPX__Event__c (before insert, after update)
     else if (Trigger.isAfter && Trigger.isUpdate) 
     {
         CAMPXEventTriggerHandler handler = new CAMPXEventTriggerHandler();
-        handler.recordStatusChange(Trigger.new, Trigger.oldMap);
+        handler.recordStatusChange(Trigger.new, Trigger.old);
     }
 }

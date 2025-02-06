@@ -14,7 +14,7 @@ public with sharing class CAMPXEventTriggerHandler
         {
             if(eventRecord.CAMPX__Status__c != oldList[0].CAMPX__Status__c)
             {
-                eventRecord. CAMPX__StatusChangeDate__c = System.now();
+                eventRecord.CAMPX__StatusChangeDate__c = System.now();
             }
         }
     }
