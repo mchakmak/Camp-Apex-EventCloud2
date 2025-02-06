@@ -8,11 +8,13 @@ public with sharing class CAMPXEventTriggerHandler
         }
     }
 
-    public void recordStatusChange(List<CAMPX__Event__c> newList, List<CAMPX__Event__c> oldList) 
+    public void recordStatusChange(List<CAMPX__Event__c> newList, Map<Id, CAMPX__Event__c> oldMap) 
     {
         for (CAMPX__Event__c eventRecord : newList) 
         {
-            if(eventRecord.CAMPX__Status__c != oldList[0].CAMPX__Status__c)
+            CAMPX__Event__c oldRecord = oldMap.get(eventRecord.Id);
+
+            if(oldRecord != null && eventRecord.CAMPX__Status__c != oldRecord.CAMPX__Status__c)
             {
                 eventRecord.CAMPX__StatusChangeDate__c = System.now();
             }
