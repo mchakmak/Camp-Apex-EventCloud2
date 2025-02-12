@@ -1,15 +1,18 @@
-trigger CAMPXEventTrigger on  CAMPX__Event__c (before insert, after update) 
+trigger CAMPXEventTrigger on CAMPX__Event__c (before insert, after update) 
 {
-    if(Trigger.isBefore)
+    CAMPXEventTriggerHandler handler = new CAMPXEventTriggerHandler();
+
+    if (Trigger.isBefore) 
     {    
         if (Trigger.isInsert) 
         {
-            CAMPXEventTriggerHandler handler = new CAMPXEventTriggerHandler();
             handler.setStatusToPlanning(Trigger.new);
         }
-        else if (Trigger.isUpdate) 
+    } 
+    else if (Trigger.isAfter) 
+    {
+        if (Trigger.isUpdate) 
         {
-            CAMPXEventTriggerHandler handler = new CAMPXEventTriggerHandler();
             handler.recordStatusChange(Trigger.new, Trigger.oldMap);
         }
     }
