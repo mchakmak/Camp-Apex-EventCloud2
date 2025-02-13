@@ -1,3 +1,15 @@
+/**
+ * Trigger handler for CAMPX__Event__c object.
+ * @description This class contains methods to handle trigger events on CAMPX__Event__c object.
+ * @author CAMPX
+ * @date 2021-07-01
+ * @version 1.0
+ * @change 2021-07-01, CAMPX, Initial version
+ * @change 2021-07-02, CAMPX, Added recordStatusChange method
+ * @change 2021-07-03, CAMPX, Added setStatusToPlanning method
+ * @change 2021-07-04, CAMPX, Added explicit DML update in recordStatusChange method
+* 
+ */
 public with sharing class CAMPXEventTriggerHandler 
 {
     public void setStatusToPlanning(List<CAMPX__Event__c> eventList) 
