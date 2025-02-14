@@ -5,5 +5,6 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert)
     if (Trigger.isBefore && Trigger.isInsert) 
     {    
         handler.setSponsorStatus(Trigger.new);
+        handler.validateEmail(Trigger.new);
     }
 }
