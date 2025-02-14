@@ -4,8 +4,7 @@ public with sharing class CAMPXSponsorTriggerHandler
     {
         for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
         {
-            sponsorRecord.CAMPX__Status__c ? Null : sponsorRecord.CAMPX__Status__c = 'Pending';
+            sponsorRecord.CAMPX__Status__c = sponsorRecord.CAMPX__Status__c ?? 'Pending';
         }
-
     }
 }
