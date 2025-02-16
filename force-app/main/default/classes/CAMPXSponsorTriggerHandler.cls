@@ -49,8 +49,8 @@ public with sharing class CAMPXSponsorTriggerHandler
         for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
         {
             if (sponsorRecord.CAMPX__Status__c == 'Accepted' && 
-                (String.isBlank(sponsorList.CAMPX__Event__c)
-                || sponsorList.CAMPX__Event__c == NULL)) 
+                (String.isBlank(sponsorRecord.CAMPX__Event__c)
+                || sponsorRecord.CAMPX__Event__c == NULL)) 
             {
                 sponsorRecord.addError('A Sponsor must be associated with an event before being Accepted.');
             }
