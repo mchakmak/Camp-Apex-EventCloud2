@@ -44,7 +44,7 @@ public with sharing class CAMPXSponsorTriggerHandler
         }
     }
 
-    public void validateStatusAndEvent(
+    /*public void validateStatusAndEvent(
         List<CAMPX__Sponsor__c> sponsorList, 
         Map<Id, CAMPX__Sponsor__c> oldSponsorMap) 
     {
@@ -74,5 +74,17 @@ public with sharing class CAMPXSponsorTriggerHandler
                 sponsorRecord.addError('A Sponsor must be associated with an event before being Accepted.');
             }
         }
-    }    
+    }*/    
+    public void validateStatusAndEvent(List<CAMPX__Sponsor__c> sponsorList) 
+    {
+        for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
+        {
+            if (sponsorRecord.CAMPX__Status__c == 'Accepted' && 
+                (String.isBlank(sponsorRecord.CAMPX__Event__c)
+                || sponsorRecord.CAMPX__Event__c == NULL)) 
+            {
+                sponsorRecord.addError('A Sponsor must be associated with an event before being Accepted.');
+            }
+        }
+    }
 }

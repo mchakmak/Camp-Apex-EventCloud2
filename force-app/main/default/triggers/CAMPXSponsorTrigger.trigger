@@ -9,7 +9,8 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert, before update, 
             handler.setSponsorStatus(Trigger.new);
             handler.validateEmail(Trigger.new);
             handler.setTier(Trigger.new);
-            handler.validateStatusAndEvent(Trigger.new, null);
+            //handler.validateStatusAndEvent(Trigger.new, null);
+            handler.validateStatusAndEvent(Trigger.new);
         }
         if(Trigger.isUpdate)
         {
@@ -18,6 +19,7 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert, before update, 
     }
     if(Trigger.isAfter && Trigger.isUpdate)
     {
-        handler.validateStatusAndEvent(Trigger.new, Trigger.oldMap);
+        //handler.validateStatusAndEvent(Trigger.new, Trigger.oldMap);
+        handler.validateStatusAndEvent(Trigger.new);
     }
 }
