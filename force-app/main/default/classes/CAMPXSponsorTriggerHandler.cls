@@ -44,16 +44,29 @@ public with sharing class CAMPXSponsorTriggerHandler
         }
     }
 
-    public void validateStatusAndEvent(List<CAMPX__Sponsor__c> sponsorList) 
+    public void validateStatusAndEvent(
+        List<CAMPX__Sponsor__c> sponsorList, 
+        Map<Id, CAMPX__Sponsor__c> oldSponsorMap) 
     {
         for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
         {
-            if (sponsorRecord.CAMPX__Status__c == 'Accepted' && 
-                (String.isBlank(sponsorRecord.CAMPX__Event__c)
-                || sponsorRecord.CAMPX__Event__c == NULL)) 
+            // Skip if oldSponsorMap is null (insert context)
+            if (oldSponsorMap == null) {
+                continue;
+            }
+    
+            // Get the old value of the Status field
+            CAMPX__Sponsor__c oldSponsorRecord = oldSponsorMap.get(sponsorRecord.Id);
+    
+            // Ensure old record exists and check if status changed to "Accepted"
+            Boolean statusChangedToAccepted = oldSponsorRecord != null &&
+                                              oldSponsorRecord.CAMPX__Status__c != 'Accepted' &&
+                                              sponsorRecord.CAMPX__Status__c == 'Accepted';
+    
+            if (statusChangedToAccepted && sponsorRecord.CAMPX__Event__c == null) 
             {
                 sponsorRecord.addError('A Sponsor must be associated with an event before being Accepted.');
             }
         }
-    }
+    }    
 }
