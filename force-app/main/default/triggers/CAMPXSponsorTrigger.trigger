@@ -13,6 +13,7 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert)
         if(Trigger.isUpdate)
         {
             handler.setTier(Trigger.new);
+            handler.validateStatusAndEvent(Trigger.new);
         }
     }
 }
