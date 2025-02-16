@@ -1,4 +1,4 @@
-trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert) 
+trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert, before update, after update) 
 {
     CAMPXSponsorTriggerHandler handler = new CAMPXSponsorTriggerHandler();
     
@@ -14,7 +14,10 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert)
         if(Trigger.isUpdate)
         {
             handler.setTier(Trigger.new);
-            handler.validateStatusAndEvent(Trigger.new, Trigger.oldMap);
         }
+    }
+    if(Trigger.isAfter && Trigger.isUpdate)
+    {
+        handler.validateStatusAndEvent(Trigger.new, Trigger.oldMap);
     }
 }

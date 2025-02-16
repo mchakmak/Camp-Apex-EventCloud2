@@ -51,7 +51,13 @@ public with sharing class CAMPXSponsorTriggerHandler
         for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
         {
             // Skip if oldSponsorMap is null (insert context)
-            if (oldSponsorMap == null) {
+            if (oldSponsorMap == null) 
+            {
+                if(sponsorRecord.CAMPX__Status__c == 'Accepted' 
+                    && sponsorRecord.CAMPX__Event__c == null) 
+                {
+                    sponsorRecord.addError('A Sponsor must be associated with an event before being Accepted.');
+                }
                 continue;
             }
     
