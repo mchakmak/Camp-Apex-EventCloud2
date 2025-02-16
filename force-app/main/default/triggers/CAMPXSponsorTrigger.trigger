@@ -9,6 +9,7 @@ trigger CAMPXSponsorTrigger on CAMPX__Sponsor__c (before insert)
             handler.setSponsorStatus(Trigger.new);
             handler.validateEmail(Trigger.new);
             handler.setTier(Trigger.new);
+            handler.validateStatusAndEvent(Trigger.new);
         }
         if(Trigger.isUpdate)
         {
