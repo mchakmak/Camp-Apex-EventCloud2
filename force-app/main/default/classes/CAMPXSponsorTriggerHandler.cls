@@ -18,4 +18,29 @@ public with sharing class CAMPXSponsorTriggerHandler
             }
         }
     }
+
+    public void setTier(List<CAMPX__Sponsor__c> sponsorList)
+    {
+        for (CAMPX__Sponsor__c sponsorRecord : sponsorList) 
+        {
+            if (sponsorRecord.CAMPX__ContributionAmount__c == NULL
+                || sponsorRecord.CAMPX__ContributionAmount__c <= 0)
+            {
+                sponsorRecord.CAMPX__Tier__c = '';
+            }
+            else if (sponsorRecord.CAMPX__ContributionAmount__c < 1000) 
+            {
+                sponsorRecord.CAMPX__Tier__c = 'Bronze';
+            }
+            else if (sponsorRecord.CAMPX__ContributionAmount__c >= 1000 
+                     && sponsorRecord.CAMPX__ContributionAmount__c < 5000) 
+            {
+                sponsorRecord.CAMPX__Tier__c = 'Silver';
+            }
+            else if (sponsorRecord.CAMPX__ContributionAmount__c >= 5000) 
+            {
+                sponsorRecord.CAMPX__Tier__c = 'Gold';
+            }
+        }
+    }
 }
